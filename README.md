@@ -34,7 +34,7 @@ Our code can be checked, compiled and tested, respectively, the usual way within
 ## Parallelization Demo Limitations / Future Work
 
 The parallelized version ([src/rcpp_nested_loops_parallel.cpp](src/rcpp_nested_loops_parallel.cpp)) is included to
-showcase the workflow. The toy function is quite lightweight, so the impact of paralellization is not particularly
+showcase the workflow. The toy function is quite lightweight, so the impact of parallelization is not particularly
 dramatic.
 
 For simplicity, the demo implementation uses as many threads as possible, while dividing the number of rows evenly. In
