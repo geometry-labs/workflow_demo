@@ -1,0 +1,5 @@
+useDynLib(RcppTest3, .registration=TRUE)
+importFrom(Rcpp, evalCpp)
+export(nestedLoops)
+export(nestedLoopsCpp11)
+export(nestedLoopsRcpp)
