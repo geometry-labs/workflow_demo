@@ -9,11 +9,11 @@ NumericMatrix rcpp_parallel_nested_loops(
     const NumericMatrix& x,
     const IntegerMatrix& y
 ) {
-  int n = x.nrow();
+  const int n = x.nrow();
   NumericMatrix result(n, n);
 
   // Create a worker function that computes a subset of the matrix
-  auto worker = [&](int start, int end) {
+  const auto worker = [&](int start, int end) {
     for(int i = start; i < end; i++) {
       for(int j = 0; j < n; j++) {
         result(i, j) = std::sqrt(std::abs(
@@ -39,12 +39,12 @@ NumericMatrix rcpp_parallel_nested_loops(
   }
 
   // Split the work into equal-sized chunks
-  int chunk_size = n / num_threads;
+  const int chunk_size = n / num_threads;
   std::vector<std::thread> threads;
 
   for(int i = 0; i < num_threads; i++) {
-    int start = i * chunk_size;
-    int end = (i == num_threads - 1) ? n : (i + 1) * chunk_size;
+    const int start = i * chunk_size;
+    const int end = (i == num_threads - 1) ? n : (i + 1) * chunk_size;
     threads.push_back(std::thread(worker, start, end));
   }
 

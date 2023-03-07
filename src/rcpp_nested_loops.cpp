@@ -7,7 +7,7 @@ NumericMatrix rcpp_nested_loops(
     const NumericMatrix& x,
     const IntegerMatrix& y
 ) {
-  int n = x.nrow();
+  const int n = x.nrow();
   NumericMatrix result(n, n);
 
   for(int i = 0; i < n; i++) {

@@ -8,7 +8,7 @@ doubles_matrix<> cpp11_nested_loops(
     const doubles_matrix<>& x,
     const integers_matrix<>& y
 ) {
-  int n = x.nrow();
+  const int n = x.nrow();
   writable::doubles_matrix<> result(n, n);
 
   for(int i = 0; i < n; i++) {
