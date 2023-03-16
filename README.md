@@ -1,15 +1,13 @@
-# README
+# README: R / C++ workflow demo
 
-## Changelog
+This repository is a demo showing how to take [pure R code](R/) to and convert it to [hybrid R/C++ code](src/).
 
-We have implemented serial solutions in both **Rcpp** (see: [src/rcpp_nested_loops.cpp](src/rcpp_nested_loops.cpp)) and
-**cpp11** (see: [src/cpp11_nested_loops.cpp](src/cpp11_nested_loops.cpp)).
+The demo code was developed by [Cheyenne Atapour](https://github.com/cheyenneatapour) (lead)
+and [Mitchell Krawiec-Thayer](https://github.com/mitchellpkt) at [Geometry Labs](https://geometrylabs.io), based on R
+toy prototypes and tests provided by [Rucknium](https://github.com/Rucknium).
 
-We have also implemented a solution with **parallelized Rcpp** (see: [src/rcpp_nested_loops_parallel.cpp](src/rcpp_nested_loops_parallel.cpp)).
-
-To add the parallelized implementation to the test suite, we added a function to [R/nestedLoops.R](R/nestedLoops.R)
-called `nestedLoopsRcppParallelized`, along with a test
-inside [tests/testthat/test-nestedLoops.R](tests/testthat/test-nestedLoops.R).
+This codebase is released under the permissive [MIT license](LICENSE), and we welcome anybody to use and modify this
+code in whole or part.
 
 ## Description
 
@@ -31,16 +29,30 @@ Our code can be checked, compiled and tested, respectively, the usual way within
 + Build --> Install Package
 + Build --> Test Package
 
-## Parallelization Demo Limitations / Future Work
+## Changelog
+
+We have implemented serial solutions in both **Rcpp** (see: [src/rcpp_nested_loops.cpp](src/rcpp_nested_loops.cpp)) and
+**cpp11** (see: [src/cpp11_nested_loops.cpp](src/cpp11_nested_loops.cpp)).
+
+We have also implemented a solution with **parallelized Rcpp** (
+see: [src/rcpp_nested_loops_parallel.cpp](src/rcpp_nested_loops_parallel.cpp)).
+
+To add the parallelized implementation to the test suite, we added a function to [R/nestedLoops.R](R/nestedLoops.R)
+called `nestedLoopsRcppParallelized`, along with a test
+inside [tests/testthat/test-nestedLoops.R](tests/testthat/test-nestedLoops.R).
+
+## Parallelization Demo: Limitations / Future Work
 
 The parallelized version ([src/rcpp_nested_loops_parallel.cpp](src/rcpp_nested_loops_parallel.cpp)) is included to
 showcase the workflow. The toy function is quite lightweight, so the impact of parallelization is not particularly
 dramatic.
 
 For simplicity, the demo implementation uses as many threads as possible, while dividing the number of rows evenly. In
-some cases (like 8 cores and 15 tasks) this approach results in idle threads; more sophisticated job schedulers can be
-implemented to improve core utilization, if the effect is present and significant in applied OSPEAD calculations.
+some cases (like 8 threads and 15 tasks, or any prime number of tasks) this approach results in some idle resources.
+More sophisticated job schedulers (or appropriately sized batching) can be implemented to improve resource utilization,
+if the effect is present and significant in applied OSPEAD calculations.
 
-Once we have a more realistic function, we can experiment with different optimization strategies. Additionally,
-productionalization of the actual OSPEAD computations will require further attention to thread locking, synchronization, and other
-nuances of parallelizing specific applications.
+One should experiment with different optimization strategies when implementing the actual target code. While this
+version is nominally parallelized around the toy function, productionalization of real tasks
+will require further attention to scheduling, thread locking, synchronization, and other nuances of parallelizing
+specific applications.
